@@ -1,29 +1,32 @@
 import React, { Component } from 'react'
-import CategoryList from "./CategoryList"
-import PhotoDetail from "./PhotoDetail"
-import PhotoList from "./PhotoList"
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import './App.css'
+import CategoryList from './CategoryList'
+import PhotoList from './PhotoList'
+import PhotoDetail from './PhotoDetail'
 
 class App extends Component {
   render() {
     return (
-      <div className='App'>
-        <Router>
-          <React.Fragment>
-            <header>
-              <Link to='/CategoryList'>CategoryList</Link>
-              <Link to='/PhotoDetail'>PhotoDetail</Link>
-              <Link to='/PhotoList'>PhotoList</Link>
-            </header>
-            <Switch>
-              <Route path='/CategoryList' Component={CategoryList} />
-              <Route path='/PhotoDetail' Component={PhotoDetail} />
-              <Route path='/PhotoList' Component={PhotoList} />
-            </Switch>
-          </React.Fragment>
-        </Router>
-      </div>
+      <Router>
+        <>
+          <header>
+            <h1>Things That Interest ME:</h1>
+            <h2>A Gallery of Photos by Allan Seitz</h2>
+          </header>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+            </ul>
+          </nav>
+          <Switch>
+            <Route exact path="/" component={CategoryList} />
+            <Route exact path="/:category" component={PhotoList} />
+            <Route path="/:category/:index" component={PhotoDetail} />
+          </Switch>
+        </>
+      </Router>
     )
   }
 }
